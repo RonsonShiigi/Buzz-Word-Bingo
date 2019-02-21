@@ -22,7 +22,14 @@ app
   })
   .post((req, res) => {
     let buzz = req.body;
-    buzzWords.push(buzz.buzzWord);
+    let word = buzz.buzzWord;
+
+    if (buzzWords.includes(word) === false) {
+      buzzWords.push(word);
+      res.send({ success: true });
+    } else {
+      res.send({ success: false });
+    }
     console.log(buzzWords);
   });
 
