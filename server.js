@@ -67,6 +67,13 @@ app.route("/reset").post((req, res) => {
   return buzzWords, totalScore;
 });
 
+app.route("/heard").post((req, res) => {
+  let word = req.body.buzzWord;
+  console.log(word);
+  totalScore += buzzWords[word];
+  res.send({ totalScore: totalScore });
+});
+
 app.listen(PORT, () => {
   console.log("COOL RUNNNINGS MON");
 });
