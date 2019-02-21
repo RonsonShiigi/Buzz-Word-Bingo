@@ -44,6 +44,19 @@ app
     } else {
       res.send({ success: false });
     }
+  })
+  .delete((req, res) => {
+    let buzz = req.body;
+    let word = buzz.buzzWord;
+    let keys = Object.keys(buzzWords);
+    if (keys.includes(word)) {
+      delete buzzWords[word];
+      res.send({ success: true });
+    } else {
+      res.send({ success: false });
+    }
+
+    res.send(word);
   });
 
 app.listen(PORT, () => {
