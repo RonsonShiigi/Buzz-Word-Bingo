@@ -34,8 +34,16 @@ app
     console.log(buzzWords);
   })
   .put((req, res) => {
-    console.log("PUTPUT Golf");
-    res.send("hi");
+    let buzz = req.body;
+    let word = buzz.buzzWord;
+    let pointers = buzz.points;
+    let keys = Object.keys(buzzWords);
+    if (keys.includes(word) === true) {
+      buzzWords[word] = pointers;
+      res.send({ sucess: true });
+    } else {
+      res.send({ success: false });
+    }
   });
 
 app.listen(PORT, () => {
