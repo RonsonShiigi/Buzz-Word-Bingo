@@ -4,6 +4,7 @@ const PORT = 8080;
 const bodyParser = require("body-parser");
 
 let buzzWords = {};
+let totalScore = 0;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -19,6 +20,7 @@ app
     res.send(buzzWords);
   })
   .post((req, res) => {
+    console.log(req);
     let buzz = req.body;
     let word = buzz.buzzWord;
     let pointers = buzz.points;
@@ -55,9 +57,15 @@ app
     } else {
       res.send({ success: false });
     }
-
-    res.send(word);
   });
+
+app.route("/reset").post((req, res) => {
+  buzzWords = {};
+  totalScore = 0;
+  res.send({ sucess: true });
+  console.log(buzzWords);
+  return buzzWords, totalScore;
+});
 
 app.listen(PORT, () => {
   console.log("COOL RUNNNINGS MON");
