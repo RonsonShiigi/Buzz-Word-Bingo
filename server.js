@@ -42,7 +42,7 @@ app
     let keys = Object.keys(buzzWords);
     if (keys.includes(word) === true) {
       buzzWords[word] = pointers;
-      res.send({ sucess: true });
+      res.send({ success: true });
     } else {
       res.send({ success: false });
     }
@@ -69,9 +69,13 @@ app.route("/reset").post((req, res) => {
 
 app.route("/heard").post((req, res) => {
   let word = req.body.buzzWord;
-  console.log(word);
-  totalScore += buzzWords[word];
-  res.send({ totalScore: totalScore });
+  let keys = Object.keys(buzzWords);
+  if (keys.includes(word)) {
+    totalScore += buzzWords[word];
+    res.send({ totalScore: totalScore });
+  } else {
+    res.send({ success: false });
+  }
 });
 
 app.listen(PORT, () => {
